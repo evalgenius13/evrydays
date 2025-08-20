@@ -248,16 +248,20 @@
             <a href="/products" class="cta-button">Start Celebrating</a>
             
             <div class="age-calculator">
-                <h3>🎂 Calculate Your EVRYday Birthday!</h3>
+                <h3>🎂 Plan Your EVRYday Birthday!</h3>
                 <div class="input-group">
-                    <label for="birthdate">Enter Your Birth Date:</label>
+                    <label for="birthdate">Your Birth Date:</label>
                     <input type="date" id="birthdate" name="birthdate">
                 </div>
-                <button class="calculate-btn" onclick="calculateAge()">Calculate My Days</button>
+                <div class="input-group">
+                    <label for="partydate">When Do You Want to Celebrate?</label>
+                    <input type="date" id="partydate" name="partydate">
+                </div>
+                <button class="calculate-btn" onclick="calculateCelebration()">Plan My Celebration</button>
                 <div class="age-result" id="ageResult">
                     <span class="age-number" id="ageNumber"></span>
-                    <span>Days of Pure Awesome!</span>
-                    <br><small>Time to celebrate this milestone!</small>
+                    <span id="celebrationText">Days of Pure Awesome!</span>
+                    <br><small id="celebrationSubtext">Time to celebrate this milestone!</small>
                 </div>
             </div>
         </div>
