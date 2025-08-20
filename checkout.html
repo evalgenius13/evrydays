@@ -546,54 +546,8 @@
         }
 
         function validateForm() {
-            let isValid = true;
-            const fields = [
-                { id: 'firstName', message: 'First name is required' },
-                { id: 'lastName', message: 'Last name is required' },
-                { id: 'email', message: 'Valid email is required' },
-                { id: 'phone', message: 'Phone number is required' },
-                { id: 'address', message: 'Address is required' },
-                { id: 'city', message: 'City is required' },
-                { id: 'state', message: 'State is required' },
-                { id: 'zipCode', message: 'ZIP code is required' },
-                { id: 'cardNumber', message: 'Card number is required' },
-                { id: 'expiryDate', message: 'Expiry date is required' },
-                { id: 'cvv', message: 'CVV is required' }
-            ];
-
-            // Clear previous errors
-            document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
-            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-            fields.forEach(field => {
-                const element = document.getElementById(field.id);
-                const errorElement = document.getElementById(field.id + 'Error');
-                
-                if (!element.value.trim()) {
-                    element.classList.add('error');
-                    errorElement.textContent = field.message;
-                    isValid = false;
-                }
-            });
-
-            // Email validation
-            const email = document.getElementById('email');
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email.value && !emailPattern.test(email.value)) {
-                email.classList.add('error');
-                document.getElementById('emailError').textContent = 'Please enter a valid email address';
-                isValid = false;
-            }
-
-            // Card number validation (basic)
-            const cardNumber = document.getElementById('cardNumber');
-            if (cardNumber.value && cardNumber.value.replace(/\s/g, '').length < 16) {
-                cardNumber.classList.add('error');
-                document.getElementById('cardNumberError').textContent = 'Please enter a valid card number';
-                isValid = false;
-            }
-
-            return isValid;
+            // No validation required for mock site
+            return true;
         }
 
         function processOrder() {
