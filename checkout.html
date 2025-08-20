@@ -462,19 +462,58 @@
     </div>
 
     <script>
-        // Package data
+        // --- helpers ---
+        function showSpinner() {
+            const overlay = document.getElementById('processingOverlay');
+            overlay.style.display = 'flex';
+        }
+
+        function goToConfirmation() {
+            // Change this if your confirmation file/path is different
+            window.location.href = 'confirmation.html';
+        }
+
+        function processOrder() {
+            console.log('[checkout] processOrder() called');
+            showSpinner();
+            setTimeout(() => {
+                console.log('[checkout] redirecting to confirmation…');
+                goToConfirmation();
+            }, 1500);
+        }
+
+        // --- wire up both submit AND click for belt & suspenders ---
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const form = document.getElementById('checkoutForm');
+                const btn  = document.getElementById('placeOrderBtn');
+
+                // Prevent native submit and run our flow
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    processOrder();
+                });
+
+                // If something blocks the submit event, still run on click
+                btn.addEventListener('click', (e) => {
+                    // If the button is type="submit", the submit handler will run anyway.
+                    // But this guarantees the spinner in case submit binding failed.
+                    if (form) e.preventDefault();
+                    processOrder();
+                });
+
+                console.log('[checkout] handlers attached');
+            } catch (err) {
+                console.error('[checkout] failed to attach handlers', err);
+            }
+        });
+
+        // Package data and other helper functions
         const packages = {
             small: { name: 'Small Celebration Package', price: 24.99, description: 'Perfect for intimate moments' },
             medium: { name: 'Medium Celebration Package', price: 49.99, description: 'Perfect for sharing your special day' },
             large: { name: 'Large Celebration Package', price: 89.99, description: 'Go all out for milestone moments' }
         };
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            loadSelectedPackage();
-            setupEventListeners();
-            setupFormValidation();
-        });
 
         function loadSelectedPackage() {
             // In a real app, this would come from URL params or session storage
@@ -482,7 +521,7 @@
             const pkg = packages[selectedPackage];
             
             document.getElementById('packageName').textContent = pkg.name;
-            document.getElementById('packagePrice').textContent = `$${pkg.price}`;
+            document.getElementById('packagePrice').textContent = `${pkg.price}`;
             document.querySelector('.item-details p').textContent = pkg.description;
             
             updateTotals(pkg.price);
@@ -495,9 +534,9 @@
             const tax = subtotal * taxRate;
             const total = subtotal + shipping + tax;
             
-            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
-            document.getElementById('orderTotal').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('subtotal').textContent = `${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `${tax.toFixed(2)}`;
+            document.getElementById('orderTotal').textContent = `${total.toFixed(2)}`;
             document.getElementById('finalTotal').textContent = total.toFixed(2);
         }
 
@@ -532,45 +571,11 @@
             });
         }
 
-        function setupFormValidation() {
-            const form = document.getElementById('checkoutForm');
-            
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (validateForm()) {
-                    processOrder();
-                }
-            });
-        }
-
-        function validateForm() {
-            // No validation required for mock site
-            return true;
-        }
-
-        function processOrder() {
-            const overlay = document.getElementById('processingOverlay');
-            
-            // Show processing overlay
-            overlay.style.display = 'flex';
-            
-            // Simulate processing time then redirect to confirmation
-            setTimeout(() => {
-                window.location.href = 'confirmation.html';
-            }, 3000);
-        }
-
-        // Add falling animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fall {
-                to {
-                    transform: translateY(100vh) rotate(360deg);
-                }
-            }
-        `;
-        document.head.appendChild(style);
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSelectedPackage();
+            setupEventListeners();
+        });
     </script>
 </body>
 </html>
