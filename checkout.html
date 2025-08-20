@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
-    <title>Checkout - EVRY™day</title>
+    <title>Checkout - EVRYdays</title>
     <style>
         * {
             margin: 0;
@@ -294,7 +294,7 @@
 <body>
     <div class="header">
         <a href="products.html" class="back-link">← Back to Packages</a>
-        <h1 class="logo">EVRY™day</h1>
+        <h1 class="logo">EVRYdays</h1>
         <p>Secure Checkout</p>
     </div>
 
@@ -302,7 +302,7 @@
         <div class="checkout-form">
             <div class="success-message" id="successMessage">
                 <h3>🎉 Order Confirmed!</h3>
-                <p>Your EVRY™day celebration package is on its way!</p>
+                <p>Your EVRYdays celebration package is on its way!</p>
                 <p><strong>Order #EVD-2025-001234</strong></p>
             </div>
 
@@ -598,23 +598,13 @@
 
         function processOrder() {
             const overlay = document.getElementById('processingOverlay');
-            const form = document.getElementById('checkoutForm');
-            const successMessage = document.getElementById('successMessage');
             
             // Show processing overlay
             overlay.style.display = 'flex';
             
-            // Simulate processing time
+            // Simulate processing time then redirect to confirmation
             setTimeout(() => {
-                overlay.style.display = 'none';
-                form.style.display = 'none';
-                successMessage.style.display = 'block';
-                
-                // Scroll to top to show success message
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-                // Add confetti effect
-                createConfetti();
+                window.location.href = 'confirmation.html';
             }, 3000);
         }
 
