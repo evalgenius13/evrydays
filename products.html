@@ -33,6 +33,27 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
+        .celebration-info {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .celebration-message {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .celebration-date {
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            opacity: 0.9;
+        }
+
         .page-title {
             font-size: 2rem;
             margin-bottom: 1rem;
@@ -196,6 +217,10 @@
     
     <div class="header">
         <h1 class="logo">EVRYdays</h1>
+        <div class="celebration-info" id="celebrationInfo">
+            <h2 class="celebration-message">You're celebrating day <span id="dayNumber">22</span>!</h2>
+            <p class="celebration-date">Party date: <span id="partyDate">August 20, 2025</span></p>
+        </div>
         <h2 class="page-title">Pick Your Party Size</h2>
         <p class="subtitle">Perfect celebrations for every milestone</p>
     </div>
