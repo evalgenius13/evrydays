@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
+    <title>Choose Your EVRY™day Package</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            color: white;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 3px solid #eee;
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ff6b6b;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.3rem 0;
+            color: #555;
+        }
+
+        .features-list li:before {
+            content: "✨ ";
+            color: #ffa500;
+            font-weight: bold;
+        }
+
+        .select-package-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .select-package-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 2rem;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .product-image {
+                height: 200px;
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">← Back to Calculator</a>
+    
+    <div class="header">
+        <h1 class="logo">EVRY™day</h1>
+        <h2 class="page-title">Choose Your Party Package</h2>
+        <p class="subtitle">Perfect celebrations for every milestone</p>
+    </div>
+
+    <div class="products-container">
+        <div class="products-grid">
+            <!-- Small Package -->
+            <div class="product-card">
+                <div class="product-image">
+                    <!-- Placeholder for small-package.png -->
+                    🎈
+                </div>
+                <div class="product-content">
+                    <h3 class="product-name">Small Celebration</h3>
+                    <div class="product-price">$24.99</div>
+                    <p class="product-description">Perfect for intimate moments and personal milestones. Everything you need for a cozy celebration.</p>
+                    <ul class="features-list">
+                        <li>Custom milestone topper</li>
+                        <li>Mini balloon bouquet</li>
+                        <li>Celebration card</li>
+                        <li>Party confetti</li>
+                        <li>Photo props (3 pieces)</li>
+                    </ul>
+                    <button class="select-package-btn" onclick="selectPackage('small')">Select Small</button>
+                </div>
+            </div>
+
+            <!-- Medium Package -->
+            <div class="product-card">
+                <div class="popular-badge">Most Popular</div>
+                <div class="product-image">
+                    <!-- Placeholder for medium-package.png -->
+                    🎉
+                </div>
+                <div class="product-content">
+                    <h3 class="product-name">Medium Celebration</h3>
+                    <div class="product-price">$49.99</div>
+                    <p class="product-description">The perfect balance of fun and convenience. Great for sharing your special day with friends and family.</p>
+                    <ul class="features-list">
+                        <li>Everything in Small package</li>
+                        <li>Balloon arch kit</li>
+                        <li>Party banner</li>
+                        <li>Cake decoration set</li>
+                        <li>Photo props (8 pieces)</li>
+                        <li>Celebration playlist QR code</li>
+                    </ul>
+                    <button class="select-package-btn" onclick="selectPackage('medium')">Select Medium</button>
+                </div>
+            </div>
+
+            <!-- Large Package -->
+            <div class="product-card">
+                <div class="product-image">
+                    <!-- Placeholder for large-package.png -->
+                    🎊
+                </div>
+                <div class="product-content">
+                    <h3 class="product-name">Large Celebration</h3>
+                    <div class="product-price">$89.99</div>
+                    <p class="product-description">Go all out! Maximum party impact for milestone moments that deserve the full celebration treatment.</p>
+                    <ul class="features-list">
+                        <li>Everything in Medium package</li>
+                        <li>Premium balloon installation</li>
+                        <li>Custom backdrop</li>
+                        <li>Party favor bags (10)</li>
+                        <li>Photo props (15 pieces)</li>
+                        <li>Celebration timeline guide</li>
+                        <li>Digital celebration certificate</li>
+                    </ul>
+                    <button class="select-package-btn" onclick="selectPackage('large')">Select Large</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectPackage(size) {
+            // Store selected package and redirect to checkout
+            localStorage.setItem('selectedPackage', size);
+            window.location.href = '/checkout';
+            
+            // Add sparkle effect
+            const event = window.event;
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.position = 'absolute';
+                sparkle.style.left = (event.clientX + Math.random() * 100 - 50) + 'px';
+                sparkle.style.top = (event.clientY + Math.random() * 100 - 50) + 'px';
+                sparkle.style.fontSize = '1.5rem';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.animation = 'fadeOut 1s ease-out forwards';
+                sparkle.style.zIndex = '1000';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(function() {
+                    sparkle.remove();
+                }, 1000);
+            }
+        }
+
+        // Add CSS animation for sparkles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                0% { opacity: 1; transform: translateY(0px) scale(1); }
+                100% { opacity: 0; transform: translateY(-50px) scale(0.5); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
