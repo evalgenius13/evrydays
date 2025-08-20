@@ -30,8 +30,6 @@
                 milestoneInfo.innerHTML = `Next big milestone: <strong>DAY ${next.value.toLocaleString()}</strong> in ${(next.value - days).toLocaleString()} days.<br>But why wait? Every day is worth celebrating!`;
             }
             
-            box.style.display = 'block';
-            
             // Store celebration data for products page
             const celebrationData = {
                 days: days,
@@ -39,6 +37,9 @@
                 birthDate: birthEl.value
             };
             localStorage.setItem('celebrationData', JSON.stringify(celebrationData));
+            
+            // Go directly to products page
+            window.location.href = 'products.html';
             
             function showError(msg) {
                 milestoneInfo.textContent = msg;
@@ -401,7 +402,6 @@
                 <button class="calculate-btn" onclick="calculateCelebration()">Get Started</button>
                 <div class="age-result" id="ageResult">
                     <div class="milestone-info" id="milestoneInfo"></div>
-                    <a href="#" class="plan-party-btn" id="planPartyBtn" onclick="goToProducts()">Plan My Celebration</a>
                 </div>
             </div>
         </div>
