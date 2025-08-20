@@ -35,6 +35,15 @@
             
             box.style.display = 'block';
             
+            // Store celebration data for products page
+            const celebrationData = {
+                days: days,
+                dayNumber: num.textContent,
+                partyDate: partyEl.value,
+                birthDate: birthEl.value
+            };
+            localStorage.setItem('celebrationData', JSON.stringify(celebrationData));
+            
             function showError(msg) {
                 congratsText.textContent = msg;
                 milestoneInfo.textContent = '';
@@ -102,6 +111,16 @@
                 });
             });
         });
+        
+        function goToProducts() {
+            // Make sure celebration data is calculated before going to products
+            const celebrationData = localStorage.getItem('celebrationData');
+            if (celebrationData) {
+                window.location.href = 'products.html';
+            } else {
+                alert('Please calculate your celebration first!');
+            }
+        }
     </script>
     <style>
         * {
@@ -391,7 +410,7 @@
                         Congratulations! You'll be <span class="age-number" id="ageNumber"></span> on your special day!
                     </div>
                     <div class="milestone-info" id="milestoneInfo"></div>
-                    <a href="products.html" class="plan-party-btn" id="planPartyBtn">Plan My Celebration</a>
+                    <a href="#" class="plan-party-btn" id="planPartyBtn" onclick="goToProducts()">Plan My Celebration</a>
                 </div>
             </div>
         </div>
