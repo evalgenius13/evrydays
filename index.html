@@ -2,36 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EVRY™days</title>
+
+  <!-- Font (optional) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <title>EVRY™days</title>
-  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    :root{
+      --brand1:#ff6b6b;--brand2:#ffa500;--text:#333;--muted:#666;--bg:#f8f9fa;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden}
+
+    /* Layout helpers */
+    .container{max-width:1100px;margin:0 auto;padding:1.25rem}
+    .narrow{max-width:640px}
+
+    /* HERO with overlay + background.png */
+    .hero-section{
+      min-height:100vh;
+      background:
+        linear-gradient(135deg,rgba(0,0,0,.45),rgba(0,0,0,.45)),
+        url('images/background.png') center/cover no-repeat;
+      display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;position:relative;
+    }
+    .hero-content{max-width:800px;padding:2rem;animation:fadeInUp 0.85s ease-out}
+    .logo{font-size:3.25rem;font-weight:800;margin-bottom:.5rem;letter-spacing:-.04em;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+    .tagline{font-size:1.35rem;margin-bottom:1.25rem;font-weight:300;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+    .description{font-size:1.12rem;margin:0 auto 1.5rem;max-width:680px;text-shadow:1px 1px 2px rgba(0,0,0,.25)}
+
+    /* Calculator card */
+    .age-calculator{
+      background:rgba(255,255,255,.96);color:#333;
+      padding:1.6rem;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.22);
+      margin:1.25rem auto 0;max-width:420px;text-align:left
+    }
+    .age-calculator h3{color:var(--brand1);text-align:center;margin-bottom:1rem;font-size:1.2rem}
+    .input-group{margin-bottom:1rem}
+    .input-group label{display:block;margin-bottom:.35rem;font-weight:600;color:#555}
+    .input-group input{width:100%;padding:.8rem;border:2px solid #ddd;border-radius:10px;font-size:1rem}
+    .input-group input:focus{outline:none;border-color:var(--brand1)}
+    .calculate-btn{
+      width:100%;padding:.9rem 1.25rem;border:none;border-radius:12px;
+      background:linear-gradient(45deg,var(--brand1),var(--brand2));color:#fff;
+      font-weight:700;font-size:1rem;cursor:pointer;transition:transform .2s,box-shadow .2s
+    }
+    .calculate-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+    .age-result{display:none;margin-top:.8rem;padding:1rem;border-radius:10px;background:linear-gradient(45deg,var(--brand1),var(--brand2));color:#fff;font-weight:600;text-align:center}
+    .milestone-info{font-size:.98rem}
+
+    /* Confetti (subtle parallax) */
+    .floating-elements{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .confetti{position:absolute;font-size:1.6rem;opacity:.75;animation:float 6s ease-in-out infinite}
+    .confetti:nth-child(1){top:10%;left:8%;animation-delay:-1s}
+    .confetti:nth-child(2){top:18%;right:10%;animation-delay:-2s}
+    .confetti:nth-child(3){bottom:26%;left:12%;animation-delay:-3s}
+    .confetti:nth-child(4){bottom:16%;right:18%;animation-delay:-4s}
+    .confetti:nth-child(5){top:58%;left:4%;animation-delay:-5s}
+    .confetti:nth-child(6){top:70%;right:6%;animation-delay:-6s}
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(0)}33%{transform:translateY(-16px) rotate(120deg)}66%{transform:translateY(8px) rotate(240deg)}}
+
+    /* Mobile tweaks */
+    @media (max-width:900px){
+      .logo{font-size:2.4rem}
+      .tagline{font-size:1.05rem}
+      .description{font-size:1rem}
+    }
+  </style>
 </head>
 <body>
   <section class="hero-section">
-    <div class="floating-elements">
-      <div class="confetti">🎉</div>
-      <div class="confetti">🎈</div>
-      <div class="confetti">🎂</div>
-      <div class="confetti">✨</div>
-      <div class="confetti">🎊</div>
-      <div class="confetti">🌟</div>
+    <!-- subtle confetti -->
+    <div class="floating-elements" aria-hidden="true">
+      <div class="confetti">🎉</div><div class="confetti">🎈</div><div class="confetti">🎂</div>
+      <div class="confetti">✨</div><div class="confetti">🎊</div><div class="confetti">🌟</div>
     </div>
 
     <div class="hero-content">
       <h1 class="logo">EVRY™days</h1>
       <p class="tagline">EVRYday is Your Birthday</p>
 
-      <!-- Unified single paragraph -->
+      <!-- Unified, single paragraph -->
       <p class="description">
         Every single day you're here is a victory worth celebrating. EVRY™days transforms ordinary dates into extraordinary milestones, because life isn't just about birthdays—it's about recognizing the incredible journey of every day you've experienced. Plan your perfect celebration, find out what day you're on, choose your party package, and we'll ship everything to arrive on time for your special day.
       </p>
 
-      <div class="age-calculator">
-        <h3>🎂 Calculate Your Milestone!</h3>
+      <div class="age-calculator" role="form" aria-labelledby="calcTitle">
+        <h3 id="calcTitle">🎂 Calculate Your Milestone!</h3>
 
         <div class="input-group">
           <label for="birthdate">Start Date:</label>
@@ -43,7 +105,7 @@
           <input type="date" id="partydate" name="partydate" />
         </div>
 
-        <button class="calculate-btn" id="calcBtn">Get Started</button>
+        <button class="calculate-btn" id="calcBtn" type="button">Get Started</button>
 
         <div class="age-result" id="ageResult">
           <div class="milestone-info" id="milestoneInfo"></div>
@@ -52,91 +114,108 @@
     </div>
   </section>
 
-<script src="js/app.js"></script>
-<script>
-  // Prefill celebration date to today's UTC date
-  (function prefillPartyDate() {
-    const party = document.getElementById('partydate');
-    if (party && !party.value) {
-      const now = new Date();
-      const yyyy = now.getUTCFullYear();
-      const mm = String(now.getUTCMonth() + 1).padStart(2,'0');
-      const dd = String(now.getUTCDate()).padStart(2,'0');
-      party.value = `${yyyy}-${mm}-${dd}`;
+  <script>
+    /* ---------- Helpers ---------- */
+    function toUTCDate(yyyyMmDd){
+      const [y,m,d]=yyyyMmDd.split('-').map(Number);
+      return new Date(Date.UTC(y, m-1, d));
     }
-  })();
+    function nextMilestone(days){
+      const ms=[
+        {value:1000,name:"The First Millennium"},
+        {value:2000,name:"The Two-Thousand Day Club"},
+        {value:3000,name:"The Triple-K Celebration"},
+        {value:4000,name:"The Four-K Achievement"},
+        {value:5000,name:"The Five-Thousand Day Victory"},
+        {value:7500,name:"The Lucky 7,500"},
+        {value:10000,name:"The Ten Thousand Day Milestone"},
+        {value:15000,name:"The Fifteen-K Legend"},
+        {value:20000,name:"The Two Decade Day"},
+        {value:25000,name:"The Quarter Century Mark"},
+        {value:30000,name:"The Thirty-K Celebration"}
+      ];
+      const nxt = ms.find(m => m.value > days);
+      if (nxt) return { value:nxt.value, name:nxt.name };
+      const round = Math.ceil(days/5000)*5000;
+      return { value:round, name:`The ${round.toLocaleString()}-Day Achievement` };
+    }
 
-  // Parallax confetti
-  window.addEventListener('mousemove', (e) => {
-    const confetti = document.querySelectorAll('.confetti');
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    confetti.forEach((el, i) => {
-      const speed = (i + 1) * 0.02;
-      el.style.transform = `translate(${(mouseX - 0.5) * speed * 100}px, ${(mouseY - 0.5) * speed * 100}px)`;
+    /* ---------- Prefill celebration date with today's UTC ---------- */
+    (function prefillPartyDate(){
+      const party = document.getElementById('partydate');
+      if (party && !party.value){
+        const now = new Date();
+        const yyyy = now.getUTCFullYear();
+        const mm = String(now.getUTCMonth()+1).padStart(2,'0');
+        const dd = String(now.getUTCDate()).padStart(2,'0');
+        party.value = `${yyyy}-${mm}-${dd}`;
+      }
+    })();
+
+    /* ---------- Subtle parallax on confetti ---------- */
+    window.addEventListener('mousemove', (e) => {
+      const confetti = document.querySelectorAll('.confetti');
+      if (!confetti.length) return;
+      const mx = e.clientX / window.innerWidth;
+      const my = e.clientY / window.innerHeight;
+      confetti.forEach((el,i)=>{
+        const speed=(i+1)*0.02;
+        el.style.transform = `translate(${(mx-.5)*speed*100}px, ${(my-.5)*speed*100}px)`;
+      });
     });
-  });
 
-  // Button click: validate → save → go
-  (function wireGetStarted() {
-    const btn = document.getElementById('calcBtn');
-    const birthEl = document.getElementById('birthdate');
-    const partyEl = document.getElementById('partydate');
-    const info = document.getElementById('milestoneInfo');
-    const box = document.getElementById('ageResult');
+    /* ---------- Get Started flow ---------- */
+    (function wireGetStarted(){
+      const btn = document.getElementById('calcBtn');
+      const birthEl = document.getElementById('birthdate');
+      const partyEl = document.getElementById('partydate');
+      const info = document.getElementById('milestoneInfo');
+      const box = document.getElementById('ageResult');
 
-    if (!btn) return;
+      if (!btn) return;
 
-    btn.addEventListener('click', () => {
-      // Clear message box each click
-      if (box) box.style.display = 'none';
-      if (info) info.textContent = '';
+      btn.addEventListener('click', () => {
+        if (box) box.style.display = 'none';
+        if (info) info.textContent = '';
 
-      // Require a birth date to compute day count
-      if (!birthEl.value) {
-        if (info) info.textContent = 'Please enter your birth date.';
-        if (box) box.style.display = 'block';
-        birthEl.focus();
-        return;
-      }
+        if (!birthEl.value){
+          info.textContent = 'Please enter your birth date.';
+          box.style.display = 'block';
+          birthEl.focus();
+          return;
+        }
 
-      const partyStr = partyEl.value || new Date().toISOString().split('T')[0];
-      const birth = toUTCDate(birthEl.value);
-      const party = toUTCDate(partyStr);
+        const partyStr = partyEl.value || new Date().toISOString().split('T')[0];
+        const birth = toUTCDate(birthEl.value);
+        const party = toUTCDate(partyStr);
 
-      if (isNaN(birth) || isNaN(party)) {
-        if (info) info.textContent = 'Invalid date(s).';
-        if (box) box.style.display = 'block';
-        return;
-      }
+        if (isNaN(birth) || isNaN(party)){
+          info.textContent = 'Invalid date(s).';
+          box.style.display = 'block';
+          return;
+        }
+        if (party < birth){
+          info.textContent = 'Celebration date cannot be before the start date.';
+          box.style.display = 'block';
+          partyEl.focus();
+          return;
+        }
 
-      if (party < birth) {
-        if (info) info.textContent = 'Party date cannot be before birth date.';
-        if (box) box.style.display = 'block';
-        partyEl.focus();
-        return;
-      }
+        const days = Math.floor((party - birth) / 86400000); // ms -> days
+        const next = nextMilestone(days);
 
-      const days = Math.floor((party - birth) / 86400000);
-      const next = nextMilestone(days);
+        info.innerHTML =
+          `🎯 Next milestone: <strong>${next.name}</strong> (Day ${next.value.toLocaleString()}) in ` +
+          `<strong>${(next.value - days).toLocaleString()}</strong> days!<br>` +
+          `<em>But why wait? Every day is worth celebrating!</em>`;
+        box.style.display = 'block';
 
-      if (info) {
-        info.innerHTML = days === next.prev
-          ? ''
-          : `🎯 Next milestone: <strong>${next.name}</strong> (Day ${next.value.toLocaleString()}) in just ${(next.value - days).toLocaleString()} days!<br><em>But why wait? Every day is worth celebrating!</em>`;
-      }
-      if (box) box.style.display = 'block';
-
-      // Save + go to products
-      const celebrationData = {
-        days,
-        partyDate: partyEl.value,
-        birthDate: birthEl.value
-      };
-      localStorage.setItem('celebrationData', JSON.stringify(celebrationData));
-      window.location.href = 'products.html';
-    });
-  })();
-</script>
+        // Persist + go to products page
+        const celebrationData = { days, partyDate: partyEl.value, birthDate: birthEl.value };
+        localStorage.setItem('celebrationData', JSON.stringify(celebrationData));
+        window.location.href = 'products.html';
+      });
+    })();
+  </script>
 </body>
 </html>
