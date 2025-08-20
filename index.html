@@ -3,7 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
     <title>EVRYdays - Celebrate Every Moment</title>
+    <script>
+        // ---- Calculator + helpers ----
+        function calculateCelebration() {
+            const birthEl = document.getElementById('birthdate');
+            const partyEl = document.getElementById('partydate');
+            const box = document.getElementById('ageResult');
+            const num = document.getElementById('ageNumber');
+            const txt = document.getElementById('celebrationText');
+            const sub = document.getElementById('celebrationSubtext');
+            if (!birthEl || !partyEl || !box || !num || !txt || !sub) return;
+            if (!birthEl.value) return showError('Please enter your birth date.');
+            const partyStr = partyEl.value || new Date().toISOString().split('T')[0];
+            const birth = toUTCDate(birthEl.value);
+            const party = toUTCDate(partyStr);
+            if (isNaN(birth) || isNaN(party)) return showError('Invalid date(s).');
+            if (party < birth) return showError('Party date cannot be before birth date.');
+            const days = Math.floor((party - birth) / 86400000); // ms -> days
+            num.textContent = `DAY ${days.toLocaleString()}`;
+            const next = nextMilestone(days);
+            if (days === next.prev) {
+                txt.textContent = 'Milestone unlocked! 🎉';
+                sub.textContent = 'Perfect time to celebrate.';
+            } else {
+                txt.textContent = `Next big one: DAY ${next.value.toLocaleString()} in ${(next.value - days).toLocaleString()} days.`;
+                sub.textContent = 'But why wait? Celebrate this one too.';
+            }
+            box.style.display = 'block';
+            
+            function showError(msg) {
+                num.textContent = '—';
+                txt.textContent = msg;
+                sub.textContent = '';
+                box.style.display = 'block';
+            }
+        }
+        
+        function toUTCDate(yyyyMmDd) {
+            const [y, m, d] = yyyyMmDd.split('-').map(Number);
+            return new Date(Date.UTC(y, m - 1, d));
+        }
+        
+        function nextMilestone(days) {
+            const presets = [1000, 2000, 3000, 4000, 5000, 7500, 10000, 20000];
+            const value = presets.find(n => n > days) ?? Math.ceil(days / 1000) * 1000;
+            return { value, prev: days };
+        }
+
+        // DOM ready code
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prefill party date with today (UTC)
+            const party = document.getElementById('partydate');
+            if (party && !party.value) {
+                const now = new Date();
+                const yyyy = now.getUTCFullYear();
+                const mm = String(now.getUTCMonth() + 1).padStart(2, '0');
+                const dd = String(now.getUTCDate()).padStart(2, '0');
+                party.value = `${yyyy}-${mm}-${dd}`;
+            }
+
+            // Add some interactive sparkle when CTA is clicked
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    // Create temporary sparkle effect
+                    for (let i = 0; i < 10; i++) {
+                        const sparkle = document.createElement('div');
+                        sparkle.innerHTML = '✨';
+                        sparkle.style.position = 'absolute';
+                        sparkle.style.left = (e.clientX + Math.random() * 100 - 50) + 'px';
+                        sparkle.style.top = (e.clientY + Math.random() * 100 - 50) + 'px';
+                        sparkle.style.fontSize = '1rem';
+                        sparkle.style.pointerEvents = 'none';
+                        sparkle.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                        document.body.appendChild(sparkle);
+                        
+                        setTimeout(function() {
+                            sparkle.remove();
+                        }, 600);
+                    }
+                });
+            }
+
+            // Add parallax effect to floating elements
+            window.addEventListener('mousemove', function(e) {
+                const confetti = document.querySelectorAll('.confetti');
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                confetti.forEach(function(el, index) {
+                    const speed = (index + 1) * 0.02;
+                    const x = (mouseX - 0.5) * speed * 100;
+                    const y = (mouseY - 0.5) * speed * 100;
+                    el.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                });
+            });
+        });
+    </script>
     <style>
         * {
             margin: 0;
