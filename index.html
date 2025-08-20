@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
-    <title>EVRYdays - Celebrate Every Moment</title>
+    <title>EVRY™day - Celebrate Every Moment</title>
     <script>
         // ---- Calculator + helpers ----
         function calculateCelebration() {
@@ -12,9 +12,10 @@
             const partyEl = document.getElementById('partydate');
             const box = document.getElementById('ageResult');
             const num = document.getElementById('ageNumber');
-            const txt = document.getElementById('celebrationText');
-            const sub = document.getElementById('celebrationSubtext');
-            if (!birthEl || !partyEl || !box || !num || !txt || !sub) return;
+            const milestoneInfo = document.getElementById('milestoneInfo');
+            const congratsText = document.getElementById('congratulationsText');
+            
+            if (!birthEl || !partyEl || !box || !num || !milestoneInfo) return;
             if (!birthEl.value) return showError('Please enter your birth date.');
             const partyStr = partyEl.value || new Date().toISOString().split('T')[0];
             const birth = toUTCDate(birthEl.value);
@@ -22,21 +23,22 @@
             if (isNaN(birth) || isNaN(party)) return showError('Invalid date(s).');
             if (party < birth) return showError('Party date cannot be before birth date.');
             const days = Math.floor((party - birth) / 86400000); // ms -> days
-            num.textContent = `DAY ${days.toLocaleString()}`;
+            
+            num.textContent = `${days.toLocaleString()} days old`;
             const next = nextMilestone(days);
+            
             if (days === next.prev) {
-                txt.textContent = 'Milestone unlocked! 🎉';
-                sub.textContent = 'Perfect time to celebrate.';
+                milestoneInfo.innerHTML = '';
             } else {
-                txt.textContent = `Next big one: DAY ${next.value.toLocaleString()} in ${(next.value - days).toLocaleString()} days.`;
-                sub.textContent = 'But why wait? Celebrate this one too.';
+                milestoneInfo.innerHTML = `Next big milestone: <strong>DAY ${next.value.toLocaleString()}</strong> in ${(next.value - days).toLocaleString()} days.<br>But why wait? Every day is worth celebrating!`;
             }
+            
             box.style.display = 'block';
             
             function showError(msg) {
-                num.textContent = '—';
-                txt.textContent = msg;
-                sub.textContent = '';
+                congratsText.textContent = msg;
+                milestoneInfo.textContent = '';
+                num.textContent = '';
                 box.style.display = 'block';
             }
         }
@@ -64,10 +66,9 @@
                 party.value = `${yyyy}-${mm}-${dd}`;
             }
 
-            // Add some interactive sparkle when CTA is clicked
-            const ctaButton = document.querySelector('.cta-button');
-            if (ctaButton) {
-                ctaButton.addEventListener('click', function(e) {
+            // Add some interactive sparkle when plan party button is clicked
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('plan-party-btn')) {
                     // Create temporary sparkle effect
                     for (let i = 0; i < 10; i++) {
                         const sparkle = document.createElement('div');
@@ -84,8 +85,8 @@
                             sparkle.remove();
                         }, 600);
                     }
-                });
-            }
+                }
+            });
 
             // Add parallax effect to floating elements
             window.addEventListener('mousemove', function(e) {
@@ -241,7 +242,7 @@
 
         .age-result {
             text-align: center;
-            padding: 1rem;
+            padding: 2rem;
             background: linear-gradient(45deg, #ff6b6b, #ffa500);
             border-radius: 10px;
             color: white;
@@ -249,10 +250,42 @@
             display: none;
         }
 
+        .congratulations {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
         .age-number {
             font-size: 2rem;
-            display: block;
-            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #fff200;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .milestone-info {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .plan-party-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: white;
+            color: #ff6b6b;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .plan-party-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: #f8f8f8;
         }
 
         .floating-elements {
@@ -335,7 +368,7 @@
         </div>
         
         <div class="hero-content">
-            <h1 class="logo">EVRYdays™</h1>
+            <h1 class="logo">EVRY™day</h1>
             <p class="tagline">Turn Any Day Into Your Birthday</p>
             <p class="description">
                 Life's too short to wait for special occasions. With customizable celebration kits, 
@@ -343,10 +376,8 @@
                 every moment, every ordinary Tuesday that deserves to feel extraordinary.
             </p>
             
-            <a href="/products" class="cta-button">Start Celebrating</a>
-            
             <div class="age-calculator">
-                <h3>🎂 Plan Your EVRYday Birthday!</h3>
+                <h3>🎂 Plan Your EVRY™day Birthday!</h3>
                 <div class="input-group">
                     <label for="birthdate">Your Birth Date:</label>
                     <input type="date" id="birthdate" name="birthdate">
@@ -355,11 +386,13 @@
                     <label for="partydate">When Do You Want to Celebrate?</label>
                     <input type="date" id="partydate" name="partydate">
                 </div>
-                <button class="calculate-btn" onclick="calculateCelebration()">Plan My Celebration</button>
+                <button class="calculate-btn" onclick="calculateCelebration()">Calculate My EVRY™day</button>
                 <div class="age-result" id="ageResult">
-                    <span class="age-number" id="ageNumber"></span>
-                    <span id="celebrationText">Days of Pure Awesome!</span>
-                    <br><small id="celebrationSubtext">Time to celebrate this milestone!</small>
+                    <div class="congratulations" id="congratulationsText">
+                        Congratulations! You'll be <span class="age-number" id="ageNumber"></span> on your EVRY™day!
+                    </div>
+                    <div class="milestone-info" id="milestoneInfo"></div>
+                    <a href="/products" class="plan-party-btn" id="planPartyBtn">Plan My Celebration</a>
                 </div>
             </div>
         </div>
